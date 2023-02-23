@@ -10,7 +10,6 @@ const createLoginService = async (
   loginData: iloginRequest
 ): Promise<string> => {
 
-  console.log(loginData)
   const queryString: string = `
     SELECT
     *
@@ -43,7 +42,7 @@ const createLoginService = async (
 
   const token: string = jwt.sign(
     {
-      qualquerCoisa: "algo",
+     qualquerCoisa:"algo",
     },
     "CHAVE SECRETA",
     {

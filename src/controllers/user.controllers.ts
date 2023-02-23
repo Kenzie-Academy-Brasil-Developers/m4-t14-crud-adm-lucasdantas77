@@ -4,6 +4,9 @@ import createUsers from "../services/users/createUsers.service";
 import getUsers from "../services/users/getUsers.service";
 import deleteUsers from "../services/users/deleteUsers.service";
 import patchUsers from "../services/users/patchUsers.services";
+import putUsersRecover from "../services/users/putUsers.services";
+import getProfile from "../services/users/getUsersProfile.services";
+
 export const createUsersControler = async (
   request: Request,
   response: Response
@@ -27,9 +30,9 @@ export const deleteUsersControler = async (
   response: Response
 ): Promise<Response> => {
   const userId = parseInt(request.params.id);
-
+  console.log(userId)
+console.log("eu sou id", request.user.id)
   await deleteUsers(userId);
-
   return response.status(204).send();
 };
 
@@ -41,6 +44,27 @@ export const patchUsersControler = async (
   const userData = request.body.name;
 
   const newUser = await patchUsers(userData, userId);
+
+  return response.json(newUser);
+};
+
+export const putUsersControler = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const userId = parseInt(request.params.id);
+
+  const newUser = await putUsersRecover(userId);
+  return response.json(newUser);
+};
+
+export const getProfileControler = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const profile = request.user.id;
+  
+  const newUser = await getProfile(profile);
 
   return response.json(newUser);
 };

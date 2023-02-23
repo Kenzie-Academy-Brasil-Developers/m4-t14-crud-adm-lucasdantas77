@@ -8,7 +8,7 @@ const ensureTokenIsValid = async (
   next: NextFunction
 ): Promise<void> => {
   let token = request.headers.authorization;
-  
+
   if (!token) {
     throw new AppError("Token is not valid", 401);
   }
@@ -20,9 +20,9 @@ const ensureTokenIsValid = async (
       throw new AppError(error.message, 401);
     }
 
-   request.user  = {
+    request.user = {
       id: parseInt(decoded.sub),
-      role: decoded.role,
+      admin: decoded.boolean,
     };
     return next();
   });

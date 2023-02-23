@@ -2,8 +2,10 @@ import { client } from "../../database";
 import { iUserResult } from "../../interfaces/users.interfaces";
 
 const getUsers = async () => {
-  const queryString = `
-    SELECT "id", "name", "email", "admin", "active" FROM users;
+  const queryString:string = `
+    SELECT "id", "name", "email", "admin", "active" 
+    FROM 
+    users;
     `;
   const queryResult: iUserResult = await client.query(queryString);
   
