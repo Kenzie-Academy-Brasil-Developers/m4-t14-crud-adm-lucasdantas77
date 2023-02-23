@@ -1,28 +1,7 @@
-import { QueryConfig, QueryResult } from "pg";
+import { QueryConfig } from "pg";
 import { client } from "../../database";
-import { AppError } from "../../error";
 
 const deleteUsers = async (userId: number): Promise<void> => {
-  const queryStringUserExists: string = `
-   SELECT
-   *
-   FROM
-    users
-    WHERE
-    id = $1;
-    `;
-
-  const queryConfigUserExists: QueryConfig = {
-    text: queryStringUserExists,
-    values: [userId],
-  };
-
-  const queryResult:QueryResult = await client.query(queryConfigUserExists);
-
-  if (queryResult.rowCount === 0) {
-    throw new AppError("user not found", 404);
-  }
-
   const queryString: string = `
   UPDATE
   users
@@ -32,14 +11,12 @@ const deleteUsers = async (userId: number): Promise<void> => {
   id = $1;
   `;
 
-  const queryConfig:QueryConfig={
-    text:queryString,
-    values:[userId]
-  }
+  const queryConfig: QueryConfig = {
+    text: queryString,
+    values: [userId],
+  };
 
- await client.query(queryConfig)
-
-
+  await client.query(queryConfig);
 };
 
 export default deleteUsers;

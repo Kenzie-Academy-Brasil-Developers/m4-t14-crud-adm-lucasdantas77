@@ -1,5 +1,4 @@
 import { client } from "../../database";
-import { AppError } from "../../error";
 import { iUserResult } from "../../interfaces/users.interfaces";
 
 const getUsers = async () => {

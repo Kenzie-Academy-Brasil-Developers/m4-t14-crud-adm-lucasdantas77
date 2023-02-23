@@ -3,6 +3,7 @@ import { iUserRequest } from "../interfaces/users.interfaces";
 import createUsers from "../services/users/createUsers.service";
 import getUsers from "../services/users/getUsers.service";
 import deleteUsers from "../services/users/deleteUsers.service";
+import patchUsers from "../services/users/patchUsers.services";
 export const createUsersControler = async (
   request: Request,
   response: Response
@@ -21,15 +22,25 @@ export const getUsersControler = async (
   return response.status(200).json(userData);
 };
 
-
-export const deleteUsersControler  = async (
+export const deleteUsersControler = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
+  const userId = parseInt(request.params.id);
 
-  const userId= parseInt(request.params.id)
+  await deleteUsers(userId);
 
-  await deleteUsers(userId)
+  return response.status(204).send();
+};
 
-  return response.status(204).send()
-}
+export const patchUsersControler = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const userId = parseInt(request.params.id);
+  const userData = request.body.name;
+
+  const newUser = await patchUsers(userData, userId);
+
+  return response.json(newUser);
+};

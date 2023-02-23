@@ -6,3 +6,13 @@ CREATE TABLE IF NOT EXISTS  users (
   "admin" BOOLEAN NOT NULL DEFAULT FALSE,
   "active" BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+INSERT INTO
+users ("name", "email", "password", "admin", "active")
+VALUES('teste3', 'teste3@gmail.com', '123456', 'true', 'true')
+RETURNING "id","name", "email", "admin", "active"; 
+
+
+SELECT * FROM users;
+
+DROP TABLE users ;
