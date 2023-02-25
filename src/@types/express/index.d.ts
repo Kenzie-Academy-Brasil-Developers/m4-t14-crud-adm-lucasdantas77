@@ -6,6 +6,7 @@ declare global {
       user: {
         id: number;
         admin: boolean;
+        active: boolean;
       };
     }
   }

@@ -30,8 +30,7 @@ export const deleteUsersControler = async (
   response: Response
 ): Promise<Response> => {
   const userId = parseInt(request.params.id);
-  console.log(userId)
-console.log("eu sou id", request.user.id)
+
   await deleteUsers(userId);
   return response.status(204).send();
 };
@@ -63,7 +62,7 @@ export const getProfileControler = async (
   response: Response
 ): Promise<Response> => {
   const profile = request.user.id;
-  
+
   const newUser = await getProfile(profile);
 
   return response.json(newUser);

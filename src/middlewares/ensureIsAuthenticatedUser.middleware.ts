@@ -19,7 +19,7 @@ const ensureIsAdmin = async (
   }
 };
 
-const verify = async (
+const verifyToken = async (
   request: Request,
   response: Response,
   next: NextFunction
@@ -33,4 +33,33 @@ const verify = async (
   return next();
 };
 
-export { ensureIsAdmin, verify };
+const verifyActive = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+): Promise<Response | void> => {
+  const isActive = request.user.active;
+  console.log(isActive);
+
+  if (isActive === true) {
+    throw new AppError("user already active", 404);
+  } else {
+    return next();
+  }
+};
+
+const verifyActiveFalse = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+): Promise<Response | void> => {
+  const isActive = request.user.active;
+
+  if (isActive === false) {
+    throw new AppError("user already active", 404);
+  } else {
+    return next();
+  }
+};
+
+export { ensureIsAdmin, verifyToken, verifyActive, verifyActiveFalse };

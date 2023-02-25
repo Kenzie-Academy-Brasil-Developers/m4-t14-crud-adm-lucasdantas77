@@ -23,6 +23,7 @@ const ensureTokenIsValid = async (
     request.user = {
       id: parseInt(decoded.sub),
       admin: decoded.admin,
+      active: decoded.admin,
     };
     return next();
   });
