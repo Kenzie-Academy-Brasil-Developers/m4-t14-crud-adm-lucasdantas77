@@ -9,7 +9,6 @@ import { QueryConfig } from "pg";
 const createLoginService = async (
   loginData: iloginRequest
 ): Promise<string> => {
-
   const queryString: string = `
     SELECT
     *
@@ -20,7 +19,7 @@ const createLoginService = async (
     
     `;
 
-  const queryConfig:QueryConfig = {
+  const queryConfig: QueryConfig = {
     text: queryString,
     values: [loginData.email],
   };
@@ -42,7 +41,7 @@ const createLoginService = async (
 
   const token: string = jwt.sign(
     {
-     qualquerCoisa:"algo",
+      admin: queryResult.rows[0].admin,
     },
     "CHAVE SECRETA",
     {
