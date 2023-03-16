@@ -39,7 +39,6 @@ const verifyActive = async (
   next: NextFunction
 ): Promise<Response | void> => {
   const isActive = request.user.active;
-  console.log(isActive);
 
   if (isActive === true) {
     throw new AppError("user already active", 404);
